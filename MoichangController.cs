@@ -12,30 +12,14 @@ public class MoichangController : MonoBehaviour {
 
 
     void Update() {
-        if (Input.GetMouseButtonDown(0)) {
-            this.animator.SetTrigger("JumpTrigger");
-        }
-        if (Input.GetKey(KeyCode.J)) {
+        if (Input.GetMouseButtonDown(0) || Input.GetKey(KeyCode.J)) {
             this.animator.SetTrigger("JumpTrigger");
         }
 
         // 上下左右移動
-        if (Input.GetKey(KeyCode.RightArrow)) {
-            transform.Translate(0, 0, 0.1f);
+        if (Input.GetKey(KeyCode.RightArrow) || Input.GetKey(KeyCode.LeftArrow) || Input.GetKey(KeyCode.DownArrow) || Input.GetKey(KeyCode.UpArrow)) {
+            transform.Translate(0, 0, 0.5f);
         }
-
-        if (Input.GetKey(KeyCode.LeftArrow)) {
-            transform.Translate(0, 0, 0.1f);
-        }
-
-        if (Input.GetKey(KeyCode.UpArrow)) {
-            transform.Translate(0, 0, 0.1f);
-        }
-
-        if (Input.GetKey(KeyCode.DownArrow)) {
-            transform.Translate(0, 0, 0.1f);
-        }
-
 
         if (Input.GetButton("Horizontal") || Input.GetButton("Vertical")) {
             transform.rotation = Quaternion.LookRotation(transform.position +
@@ -49,5 +33,10 @@ public class MoichangController : MonoBehaviour {
             transform.rotation = Quaternion.Euler(0.0f, 180.0f, 0.0f);
         }
 
+    }
+
+    private void OnTriggerEnter(Collider other) {
+        Debug.Log("衝突！");
+        Destroy(other.gameObject);
     }
 }
