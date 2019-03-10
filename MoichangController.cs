@@ -7,13 +7,11 @@ public class MoichangController : MonoBehaviour {
 
     Animator animator;
     GameObject gameDirector;
-    public int appleCnt = 0;
+    public static int appleCnt = 0;
 
     void Start() {
         this.animator = GetComponent<Animator>();
-        //this.gameDirector = GameObject.Find("GameDirector");
     }
-
 
     void Update() {
         if (Input.GetMouseButtonDown(0) || Input.GetKey(KeyCode.J)) {
@@ -46,6 +44,6 @@ public class MoichangController : MonoBehaviour {
     }
 
     public int GetAppleCount(){
-        return this.appleCnt;
+        return appleCnt;
     }
 }
