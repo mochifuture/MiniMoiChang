@@ -1,13 +1,17 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class MoichangController : MonoBehaviour {
 
     Animator animator;
+    GameObject gameDirector;
+    public int appleCnt = 0;
 
     void Start() {
         this.animator = GetComponent<Animator>();
+        //this.gameDirector = GameObject.Find("GameDirector");
     }
 
 
@@ -36,7 +40,12 @@ public class MoichangController : MonoBehaviour {
     }
 
     private void OnTriggerEnter(Collider other) {
-        Debug.Log("衝突！");
+        appleCnt++;
+        Debug.Log("衝突！" + appleCnt);
         Destroy(other.gameObject);
+    }
+
+    public int GetAppleCount(){
+        return this.appleCnt;
     }
 }

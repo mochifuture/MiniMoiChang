@@ -1,0 +1,7 @@
+﻿using System.Collections; using System.Collections.Generic; using UnityEngine; using UnityEngine.UI;  public class GameDirector : MonoBehaviour {      public GameObject appleCounter;     public GameObject timeCounter;      MoichangController moichangController;     AppleGenerator appleGenerator;
+     private float time = 10.0f;     private int score = 0;
+    private bool isTimeOut = false;      void Start() {         this.moichangController = GameObject.Find("minimoi").GetComponent<MoichangController>();         this.timeCounter = GameObject.Find("TimeCounter");         this.appleGenerator = GameObject.Find("AppleGenerator").GetComponent<AppleGenerator>();     }      void Update() {
+        if (0 <= this.time) {             this.time -= Time.deltaTime;             SetCounterValues();         } else if (this.isTimeOut == false) {             this.timeOut();             this.isTimeOut = true;         }     }      void SetCounterValues() {         this.score = moichangController.GetAppleCount();         this.appleCounter.GetComponent<Text>().text = this.score.ToString();         this.timeCounter.GetComponent<Text>().text = this.time.ToString("F1");     }
+
+    void timeOut() {         this.appleGenerator.stopGenerateApple();         Debug.Log("TimeOut");
+    }  } 
